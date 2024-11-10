@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+
+
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=100)
@@ -13,8 +15,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name
-
-
 
 
 class QuantityVariant(models.Model):
@@ -38,6 +38,8 @@ class SizeVariant(models.Model):
         return self.size_name
 
 
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=100)
@@ -53,3 +55,8 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    image = models.ImageField(upload_to='static/product')
